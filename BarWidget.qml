@@ -18,6 +18,7 @@ BarWidget {
 
   readonly property string outputName: String(setting("output", "HDMI-A-1"))
   readonly property string prefix: String(setting("label", "EXT"))
+  readonly property string icon: String(setting("icon", "󰔂"))
   readonly property int highRate: Math.max(30, parseInt(setting("highRate", 120), 10) || 120)
   readonly property int lowRate: Math.max(30, parseInt(setting("lowRate", 60), 10) || 60)
   readonly property int pollInterval: Math.max(1, parseInt(setting("pollInterval", 2), 10) || 2)
@@ -37,7 +38,7 @@ BarWidget {
     if (make !== "" && model !== "") return make + " " + model
     return model !== "" ? model : make
   }
-  readonly property string buttonText: (showIcon ? "󰍺 " : "") + (prefix !== "" ? prefix + " " : "") + rateLabel
+  readonly property string buttonText: (showIcon && icon !== "" ? icon + " " : "") + (prefix !== "" ? prefix + " " : "") + rateLabel
   readonly property string tooltipText: available && monitor
     ? "External display · " + plain(outputName)
       + (monitorName !== "" ? " · " + monitorName : "")

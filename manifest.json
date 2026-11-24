@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "miseriae.display-refresh",
   "name": "Display Refresh",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "miseriae",
   "license": "MIT",
   "description": "Quick 60/120 Hz switch for an external display in the Omarchy bar.",
@@ -29,6 +29,7 @@
     "defaults": {
       "output": "HDMI-A-1",
       "label": "EXT",
+      "icon": "󰔂",
       "highRate": 120,
       "lowRate": 60,
       "pollInterval": 2,
@@ -48,6 +49,13 @@
         "label": "Prefix label",
         "defaultValue": "EXT",
         "description": "Shown before the refresh rate, e.g. EXT, HDMI, or 24\"."
+      },
+      {
+        "key": "icon",
+        "type": "string",
+        "label": "Icon glyph",
+        "defaultValue": "󰔂",
+        "description": "Nerd Font glyph before the label; empty hides it. Try 󰔂 (TV), 󰍺 (multi-monitor), or 󰍹 (monitor)."
       },
       {
         "key": "highRate",

@@ -2,10 +2,12 @@
 
 Quick 60/120 Hz switch for an external display in the Omarchy bar.
 
-- Shows `󰍺 EXT 120` / `󰍺 EXT 60` for the configured external output (default
+- Shows `󰔂 EXT 120` / `󰔂 EXT 60` for the configured external output (default
   `HDMI-A-1`); the tooltip includes the output and monitor model.
 - `label` (default `EXT`) is shown before the rate; set it to `HDMI`, `24"`, or
   empty if you prefer.
+- `icon` (default `󰔂`, TV/external display) is shown before the label; try
+  `󰍺` (multi-monitor) or `󰍹` (monitor), or set it empty.
 - Left-click toggles between `highRate` (default 120) and `lowRate` (default 60).
 - Middle-click refreshes immediately.
 - Hides itself when the output is disconnected or disabled.
@@ -42,6 +44,7 @@ omarchy restart shell
 ```sh
 omarchy bar set miseriae.display-refresh output HDMI-A-1
 omarchy bar set miseriae.display-refresh label EXT
+omarchy bar set miseriae.display-refresh icon 󰔂
 omarchy bar set miseriae.display-refresh highRate 120
 omarchy bar set miseriae.display-refresh lowRate 60
 omarchy bar set miseriae.display-refresh pollInterval 2
@@ -52,6 +55,8 @@ omarchy bar set miseriae.display-refresh showIcon true
 
 - The `EXT` prefix makes it clear the number is the external display's refresh
   rate, even when the widget is on the laptop bar.
+- The default `󰔂` icon is a TV/external-display glyph, distinct from the built-in
+  Display widget's `󰍺` multi-monitor icon.
 - The built-in Display panel handles brightness, scale, and enabling/disabling
   displays; this widget handles the refresh-rate toggle.
 - The mode is selected from `hyprctl monitors -j`'s `availableModes` for the
