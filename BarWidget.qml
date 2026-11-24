@@ -17,6 +17,7 @@ BarWidget {
   moduleName: "miseriae.display-refresh"
 
   readonly property string outputName: String(setting("output", "HDMI-A-1"))
+  readonly property string prefix: String(setting("label", "EXT"))
   readonly property int highRate: Math.max(30, parseInt(setting("highRate", 120), 10) || 120)
   readonly property int lowRate: Math.max(30, parseInt(setting("lowRate", 60), 10) || 60)
   readonly property int pollInterval: Math.max(1, parseInt(setting("pollInterval", 2), 10) || 2)
@@ -29,10 +30,24 @@ BarWidget {
   readonly property bool isHigh: currentRate >= highRate - 1
   readonly property int targetRate: isHigh ? lowRate : highRate
   readonly property string rateLabel: currentRate > 0 ? String(Math.round(currentRate)) : String(highRate)
-  readonly property string buttonText: (showIcon ? "󰍹 " : "") + rateLabel
+  readonly property string monitorName: {
+    if (!monitor) return ""
+    var make = plain(monitor.make)
+    var model = plain(monitor.model)
+    if (make !== "" && model !== "") return make + " " + model
+    return model !== "" ? model : make
+  }
+  readonly property string buttonText: (showIcon ? "󰍺 " : "") + (prefix !== "" ? prefix + " " : "") + rateLabel
   readonly property string tooltipText: available && monitor
-    ? outputName + " · " + monitor.width + "×" + monitor.height + " · " + rateLabel + " Hz — click for " + targetRate + " Hz"
-    : "Display not connected"
+    ? "External display · " + plain(outputName)
+      + (monitorName !== "" ? " · " + monitorName : "")
+      + " · " + monitor.width + "×" + monitor.height
+      + " · " + rateLabel + " Hz — click for " + targetRate + " Hz"
+    : "External display not connected"
+
+  function plain(value) {
+    return String(value || "").replace(/[<>]/g, "")
+  }
 
   function boolSetting(name, fallback) {
     var value = setting(name, fallback)
